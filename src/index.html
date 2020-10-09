@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToDo</title>
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
-  @@include('./header.html')
-  <h1>Hello cruel World</h1>
-  @@include('./test.html', {
-      "text": "Exclude.",
-  })
+  @@include('./html/header.html')
+  <main class="main">
+    <div class="container main__container">
+      Todo list
+    </div>
+  </main>
 
   <script src="main.js"></script>
 </body>

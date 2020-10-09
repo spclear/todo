@@ -5,6 +5,7 @@ const fileInclude = require('gulp-file-include');
 const sass = require('gulp-sass');
 const beautify = require('gulp-beautify');
 const { src } = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
 
 const distFolder = './dist/';
 const srcFolder = './src/';
@@ -21,8 +22,11 @@ function html() {
 
 function css() {
   return (
-    gulp.src(srcFolder + 'assets/scss/style.scss')
+    gulp.src(srcFolder + 'scss/style.scss')
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(autoprefixer({
+        cascade: false
+      }))
       .pipe(gulp.dest(distFolder + 'css'))
       .pipe(browsersync.stream())
   )
@@ -47,8 +51,8 @@ function js() {
 function copyAssets() {
   return (
     src(srcFolder + 'assets/**/*.*')
-      .pipe(dest(distFolder + 'assets/'))
-      .on('end', browsersync.reload())
+      .pipe(gulp.dest(distFolder + 'assets/'))
+      .on('end', browsersync.reload)
   )
 }
 
@@ -60,7 +64,7 @@ function watchChanges() {
   })
 
   gulp.watch([srcFolder + '**/*.html'], html);
-  gulp.watch([srcFolder + 'assets/scss/**/*.scss'], css);
+  gulp.watch([srcFolder + 'scss/**/*.scss'], css);
   gulp.watch([srcFolder + 'js/**/*.js'], js);
   gulp.watch('./src/assets/**/*.*', copyAssets);
 }
@@ -85,7 +89,10 @@ function prodJs() {
 function prodCss() {
   return (
     gulp.src(srcFolder + 'scss/style.scss')
-      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+      .pipe(autoprefixer({
+        cascade: false
+      }))
       .pipe(gulp.dest(distFolder + 'css'))
       .pipe(browsersync.stream())
   )

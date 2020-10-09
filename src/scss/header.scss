@@ -1,12 +1,51 @@
-.header {
-  border: 1px solid red;
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px 30px;
-  text-decoration: line-through;
+$base_color: #1e272e;
+$header_height: 50px;
 
-  >span {
-    font-weight: bold;
-    color: green;
+.header {
+  margin: 0 auto;
+  height: $header_height;
+  background-color: #546de5;
+  width: 100%;
+  color: $base_color;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+
+  .header__container {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    font-weight: 900;
+    font-size: 1.5rem;
+    &:hover {
+      animation: swing;
+      animation-duration: 1s;
+      cursor: pointer;
+    }
+  }
+
+  &__settings-bar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    justify-content: flex-end;
+
+    i {
+      color: $base_color;
+      line-height: $header_height;
+      &:hover {
+        transform: rotate(360deg);
+        transition: transform 1s ease-out;
+        cursor: pointer;
+      }
+    }
   }
 }
