@@ -1,0 +1,16 @@
+.header {
+  border: 1px solid red;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  text-decoration: line-through;
+}
+
+.header > span {
+  font-weight: bold;
+  color: green;
+}
+
+body {
+  background-color: lightblue;
+}

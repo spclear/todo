@@ -15,6 +15,10 @@
   "devDependencies": {
     "browser-sync": "^2.26.12",
     "gulp": "^4.0.2",
+    "gulp-beautify": "^3.0.0",
+    "gulp-file-include": "^2.2.2",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-stream": "^6.1.0"

@@ -1,20 +1,36 @@
-"use strict";
-
+const gulp = require('gulp');
+const browsersync = require('browser-sync').create();
 const webpack = require('webpack-stream');
-const { src, dest, series, parallel, watch } = require('gulp');
-const { reload, init, stream } = require('browser-sync');
+const fileInclude = require('gulp-file-include');
+const sass = require('gulp-sass');
+const beautify = require('gulp-beautify');
+const { src } = require('gulp');
 
-const dist = './dist/';
+const distFolder = './dist/';
+const srcFolder = './src/';
 
-const copyHtml = () => {
-  return src('./src/index.html')
-          .pipe(dest(dist))
-          .pipe(stream());
+function html() {
+  return (
+    gulp.src(srcFolder + 'index.html')
+      .pipe(fileInclude())
+      .pipe(beautify.html())
+      .pipe(gulp.dest(distFolder))
+      .pipe(browsersync.stream())
+  )
 }
 
-const buildJs = () => {
+function css() {
   return (
-    src('./src/js/index.js')
+    gulp.src(srcFolder + 'assets/scss/style.scss')
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(gulp.dest(distFolder + 'css'))
+      .pipe(browsersync.stream())
+  )
+}
+
+function js() {
+  return (
+    gulp.src(srcFolder + 'js/index.js')
       .pipe(webpack({
         mode: 'development',
         output: {
@@ -23,47 +39,57 @@ const buildJs = () => {
         watch: false,
         devtool: 'source-map'
       }))
-      .pipe(dest(dist))
-      .on('end', reload)
+      .pipe(gulp.dest(distFolder))
+      .on('end', browsersync.reload)
   )
 }
 
-const buildProdJs = () => {
+function copyAssets() {
   return (
-    src('./src/js/index.js')
-      .pipe(webpack({
-        mode: 'production',
-        output: {
-          filename: 'main.js'
-        },
-        watch: false,
-        devtool: 'source-map'
-      }))
-      .pipe(dest(dist))
+    src(srcFolder + 'assets/**/*.*')
+      .pipe(dest(distFolder + 'assets/'))
+      .on('end', browsersync.reload())
   )
 }
 
-const copyAssets = () => {
-  return src('./src/assets/**/*.*')
-    .pipe(dest(dist + 'assets'))
+function watchChanges() {
+  browsersync.init({
+    server: distFolder,
+    port: 3001,
+    notify: false,
+  })
+
+  gulp.watch([srcFolder + '**/*.html'], html);
+  gulp.watch([srcFolder + 'assets/scss/**/*.scss'], css);
+  gulp.watch([srcFolder + 'js/**/*.js'], js);
+  gulp.watch('./src/assets/**/*.*', copyAssets);
 }
 
-const watchChanges = () => {
-  init({
-    server: './dist/',
-    port: 4000,
-    notify: true
-  });
 
-  watch('./src/index.html', copyHtml);
-  watch('./src/assets/**/*.*', copyAssets);
-  watch('./src/js/**/*.js', buildJs);
+function prodJs() {
+  return (
+    gulp.src(srcFolder + 'js/index.js')
+    .pipe(webpack({
+      mode: 'production',
+      output: {
+        filename: 'main.js'
+      },
+      watch: false,
+      devtool: 'source-map'
+    }))
+    .pipe(gulp.dest(distFolder))
+    .on('end', browsersync.reload)
+  )
 }
 
-const build = async () => {
-  return await parallel(copyHtml, copyAssets, buildJs)();
+function prodCss() {
+  return (
+    gulp.src(srcFolder + 'scss/style.scss')
+      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(gulp.dest(distFolder + 'css'))
+      .pipe(browsersync.stream())
+  )
 }
 
-exports.build = build;
-exports.prodbuild = buildProdJs;
-exports.default = series(build, watchChanges);
+exports.buildProd = gulp.series(html, prodCss, prodJs, copyAssets);
+exports.default = gulp.series(css, html, js, copyAssets, watchChanges);
