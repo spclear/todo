@@ -1,15 +1,16 @@
-$base_color: #1e272e;
+@import './colors.scss';
+
 $header_height: 50px;
 
 .header {
   margin: 0 auto;
   height: $header_height;
-  background-color: #546de5;
+  background-color: $blue_color;
   width: 100%;
   color: $base_color;
   box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
 
-  .header__container {
+  &__container {
     height: 100%;
     position: relative;
     display: flex;
@@ -40,10 +41,9 @@ $header_height: 50px;
 
     i {
       color: $base_color;
-      line-height: $header_height;
       &:hover {
-        transform: rotate(360deg);
-        transition: transform 1s ease-out;
+        transform: rotate(2turn);
+        transition: transform 1.5s linear;
         cursor: pointer;
       }
     }

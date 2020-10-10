@@ -1,0 +1,57 @@
+@import './colors.scss';
+@import './mixins.scss';
+
+.tasks {
+  flex-grow: 1;
+  max-width: 50%;
+  margin-right: 10px;
+  justify-content: space-between;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  align-self: flex-start;
+
+  &__container {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  &__title {
+    text-align: center;
+    text-transform: uppercase;
+    color: $base_color;
+    &::after {
+      content: '';
+      @include bottom_line(15px);
+    }
+  }
+
+  &__no-list {
+
+    text-align: center;
+    color: $gray_color;
+  }
+
+  &__list {
+    overflow-y: scroll;
+    height: 240px;
+    margin-top: 25px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $blue_color;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+  }
+}

@@ -1,4 +1,6 @@
 @import './header.scss';
+@import './create.scss';
+@import './taskslist.scss';
 
 * {
   margin: 0;
@@ -9,6 +11,20 @@
 html {
   min-height: 100vh;
   font-size: 16px;
+}
+
+a, 
+a:focus,
+input,
+input:focus,
+textarea,
+textarea:focus, 
+button,
+button:focus {
+  outline: none;
+  background-color: none;
+  text-decoration: none;
+  border: none;
 }
 
 body {
@@ -22,6 +38,10 @@ body {
   .main {
     &__container {
       padding: 40px 25px;
+    }
+
+    &__descr {
+      display: flex;
     }
   }
 }
