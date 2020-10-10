@@ -1,10 +1,11 @@
+import { getAllLists } from '../common/localStorage';
 import updateLists from './updateLists'
 
-function deleteListener(listSelector, deletingTriggerClass) {
+function deleteListener(listSelector, deletingTriggerClass, selectSelector) {
   const listNode = document.querySelector(listSelector);
   
   listNode.addEventListener('click', e => {
-    let lists = JSON.parse(localStorage.getItem('lists'));
+    let lists = getAllLists();
 
     const isTrigger = e.target.classList.contains(deletingTriggerClass);
 
@@ -14,7 +15,7 @@ function deleteListener(listSelector, deletingTriggerClass) {
       lists = lists.filter(item => item.listName !== listName);
       
       localStorage.setItem('lists', JSON.stringify(lists));
-      updateLists(listSelector);
+      updateLists(listSelector, selectSelector);
     }
   })
 }

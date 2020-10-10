@@ -1,27 +1,25 @@
-import { getListsNames } from "../common/localStorage";
+import { getAllLists } from "../common/localStorage";
+import configureSelect from "./configureSelect";
 
-function updateLists(listSelector) {
-  const listNames = getListsNames();
+function updateLists(listSelector, selectSelector) {
+  const lists = getAllLists()
   const listNode = document.querySelector(listSelector);
-  let result = '';
   
-  const isNotUnlisted = (listName) => {
-    if (listName !== "Unlisted") {
-      return `<i class="fas fa-times delete-list" data-list-name='${listName}'></i>`
+  let result = `<div class="tasks__item unlisted">Unlisted</div>`;
+  
+  lists.forEach(item => {
+    if (item.id !== 'unlisted') {
+      result += `
+        <div class="tasks__item ${item.id === 'unlisted' && 'unlisted'}">
+          ${item.listName}
+          <i class="fas fa-times delete-list" data-list-name='${item.id}'></i>
+        </div>
+      `
     }
-    return '';
-  }
-  
-  listNames.forEach(item => {
-    result += `
-      <div class="tasks__item ${item === 'Unlisted' && 'unlisted'}">
-        ${item}
-        ${isNotUnlisted(item)}
-      </div>
-    `
   })
-
+  
   listNode.innerHTML = result;
+  configureSelect(selectSelector);
 }
 
 export default updateLists;

@@ -86,50 +86,25 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/common/initialize.js":
-/*!*************************************!*\
-  !*** ./src/js/common/initialize.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function init() {
-  const isContains = localStorage.getItem('lists');
-
-  if (!isContains) {
-    const lists = [
-      {
-        listName: 'Unlisted',
-        listItems: [],
-      }
-    ];
-
-    localStorage.setItem('lists', JSON.stringify(lists));
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (init);
-
-/***/ }),
-
 /***/ "./src/js/common/localStorage.js":
 /*!***************************************!*\
   !*** ./src/js/common/localStorage.js ***!
   \***************************************/
-/*! exports provided: getListsNames */
+/*! exports provided: getListsNames, getAllLists */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getListsNames", function() { return getListsNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllLists", function() { return getAllLists; });
 const getListsNames = () => {
   const lists = JSON.parse(localStorage.getItem('lists'));
   return lists.reduce((acc, curr) => (
     acc = [...acc, curr.listName]
   ), []);
 }
+
+const getAllLists = () => JSON.parse(localStorage.getItem('lists'));
 
 /***/ }),
 
@@ -142,11 +117,13 @@ const getListsNames = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _common_initialize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/initialize */ "./src/js/common/initialize.js");
-/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common/localStorage */ "./src/js/common/localStorage.js");
-/* harmony import */ var _modules_addList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/addList */ "./src/js/modules/addList.js");
-/* harmony import */ var _modules_deleteList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/deleteList */ "./src/js/modules/deleteList.js");
-/* harmony import */ var _modules_updateLists__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/updateLists */ "./src/js/modules/updateLists.js");
+/* harmony import */ var _modules_initialize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/initialize */ "./src/js/modules/initialize.js");
+/* harmony import */ var _modules_addList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/addList */ "./src/js/modules/addList.js");
+/* harmony import */ var _modules_deleteList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/deleteList */ "./src/js/modules/deleteList.js");
+/* harmony import */ var _modules_updateLists__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/updateLists */ "./src/js/modules/updateLists.js");
+/* harmony import */ var _modules_configureSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/configureSelect */ "./src/js/modules/configureSelect.js");
+/* harmony import */ var _modules_addTask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/addTask */ "./src/js/modules/addTask.js");
+
 
 
 
@@ -154,10 +131,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  Object(_common_initialize__WEBPACK_IMPORTED_MODULE_0__["default"])();  
-  Object(_modules_updateLists__WEBPACK_IMPORTED_MODULE_4__["default"])('.tasks__list');
-  Object(_modules_deleteList__WEBPACK_IMPORTED_MODULE_3__["default"])('.tasks__list', 'delete-list')
-  Object(_modules_addList__WEBPACK_IMPORTED_MODULE_2__["addList"])('.new-list', '.tasks__list');
+  Object(_modules_initialize__WEBPACK_IMPORTED_MODULE_0__["default"])();  
+  Object(_modules_updateLists__WEBPACK_IMPORTED_MODULE_3__["default"])('.tasks__list', '#select-list');
+  Object(_modules_configureSelect__WEBPACK_IMPORTED_MODULE_4__["default"])('#select-list');
+  Object(_modules_deleteList__WEBPACK_IMPORTED_MODULE_2__["default"])('.tasks__list', 'delete-list', '#select-list')
+  Object(_modules_addList__WEBPACK_IMPORTED_MODULE_1__["addList"])('.new-list', '.tasks__list', '#select-list');
+  Object(_modules_addTask__WEBPACK_IMPORTED_MODULE_5__["default"])('.new-task');
 
 })
 
@@ -174,29 +153,30 @@ document.addEventListener('DOMContentLoaded', () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addList", function() { return addList; });
-/* harmony import */ var _updateLists__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateLists */ "./src/js/modules/updateLists.js");
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+/* harmony import */ var _updateLists__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateLists */ "./src/js/modules/updateLists.js");
 
 
-const addList = (formSelector, listSelector) => {
+
+const addList = (formSelector, listSelector, selectSelector) => {
   const form = document.querySelector(formSelector);
 
   form.addEventListener('submit', event => {
     event.preventDefault();
 
-    const lists = JSON.parse(localStorage.getItem('lists'));
+    const lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])();
     const formData = new FormData(form);
     const listName = formData.get('list');
-    const listIndex = lists.findIndex(item => item.listName === listName);
+    const listIndex = lists.findIndex(item => item.id === listName.toLowerCase());
 
     if (lists.length >= 10) {
       alert('Max number of lists is 10!');
     }
 
     if (listIndex === -1) {
-      lists.push({ listName, listItems: [] });
-      
+      lists.push({ listName, id: listName.toLowerCase(), listItems: [] });
       localStorage.setItem('lists', JSON.stringify(lists));
-      Object(_updateLists__WEBPACK_IMPORTED_MODULE_0__["default"])(listSelector);
+      Object(_updateLists__WEBPACK_IMPORTED_MODULE_1__["default"])(listSelector, selectSelector);
       
       form.reset();
     } else {
@@ -204,6 +184,77 @@ const addList = (formSelector, listSelector) => {
     }
   });
 }
+
+/***/ }),
+
+/***/ "./src/js/modules/addTask.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/addTask.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+
+
+function addTask(formSelector) {
+  const form = document.querySelector(formSelector);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])();
+    const requiredList = lists.find(item => item.id === formData.get('list'));
+
+    const newTask = {
+      task: formData.get('task'),
+      isImportant: formData.get('important') ? true : false,
+    }
+
+    requiredList.listItems.push(newTask);
+    localStorage.setItem('lists', JSON.stringify(lists));
+
+    form.reset();
+  })
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (addTask);
+
+/***/ }),
+
+/***/ "./src/js/modules/configureSelect.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/configureSelect.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+
+
+function configureSelect(selector) {
+  const select = document.querySelector(selector);
+  const lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])();
+
+  let result = '';
+
+  lists.forEach(item => {
+    result += `
+      <option value='${item.id}' >
+        ${item.listName}
+      </option>
+    `
+  })
+
+  select.innerHTML = result;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (configureSelect);
 
 /***/ }),
 
@@ -216,14 +267,16 @@ const addList = (formSelector, listSelector) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _updateLists__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateLists */ "./src/js/modules/updateLists.js");
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+/* harmony import */ var _updateLists__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateLists */ "./src/js/modules/updateLists.js");
 
 
-function deleteListener(listSelector, deletingTriggerClass) {
+
+function deleteListener(listSelector, deletingTriggerClass, selectSelector) {
   const listNode = document.querySelector(listSelector);
   
   listNode.addEventListener('click', e => {
-    let lists = JSON.parse(localStorage.getItem('lists'));
+    let lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])();
 
     const isTrigger = e.target.classList.contains(deletingTriggerClass);
 
@@ -233,12 +286,41 @@ function deleteListener(listSelector, deletingTriggerClass) {
       lists = lists.filter(item => item.listName !== listName);
       
       localStorage.setItem('lists', JSON.stringify(lists));
-      Object(_updateLists__WEBPACK_IMPORTED_MODULE_0__["default"])(listSelector);
+      Object(_updateLists__WEBPACK_IMPORTED_MODULE_1__["default"])(listSelector, selectSelector);
     }
   })
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (deleteListener);
+
+/***/ }),
+
+/***/ "./src/js/modules/initialize.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/initialize.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function init() {
+  const isContains = localStorage.getItem('lists');
+
+  if (!isContains) {
+    const lists = [
+      {
+        id: 'unlisted',
+        listName: 'Unlisted',
+        listItems: [],
+      }
+    ];
+
+    localStorage.setItem('lists', JSON.stringify(lists));
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (init);
 
 /***/ }),
 
@@ -252,30 +334,29 @@ function deleteListener(listSelector, deletingTriggerClass) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+/* harmony import */ var _configureSelect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./configureSelect */ "./src/js/modules/configureSelect.js");
 
 
-function updateLists(listSelector) {
-  const listNames = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getListsNames"])();
+
+function updateLists(listSelector, selectSelector) {
+  const lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])()
   const listNode = document.querySelector(listSelector);
-  let result = '';
   
-  const isNotUnlisted = (listName) => {
-    if (listName !== "Unlisted") {
-      return `<i class="fas fa-times delete-list" data-list-name='${listName}'></i>`
+  let result = `<div class="tasks__item unlisted">Unlisted</div>`;
+  
+  lists.forEach(item => {
+    if (item.id !== 'unlisted') {
+      result += `
+        <div class="tasks__item ${item.id === 'unlisted' && 'unlisted'}">
+          ${item.listName}
+          <i class="fas fa-times delete-list" data-list-name='${item.id}'></i>
+        </div>
+      `
     }
-    return '';
-  }
-  
-  listNames.forEach(item => {
-    result += `
-      <div class="tasks__item ${item === 'Unlisted' && 'unlisted'}">
-        ${item}
-        ${isNotUnlisted(item)}
-      </div>
-    `
   })
-
+  
   listNode.innerHTML = result;
+  Object(_configureSelect__WEBPACK_IMPORTED_MODULE_1__["default"])(selectSelector);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (updateLists);

@@ -4,3 +4,5 @@ export const getListsNames = () => {
     acc = [...acc, curr.listName]
   ), []);
 }
+
+export const getAllLists = () => JSON.parse(localStorage.getItem('lists'));

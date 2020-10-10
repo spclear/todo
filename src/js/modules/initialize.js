@@ -4,6 +4,7 @@ function init() {
   if (!isContains) {
     const lists = [
       {
+        id: 'unlisted',
         listName: 'Unlisted',
         listItems: [],
       }
