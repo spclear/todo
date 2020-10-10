@@ -29,25 +29,47 @@
                             <div class="create-section__title">
                                 Create a new task
                             </div>
-                            <div class="create-section__create">
-                                <div class="create-section__create-input create-input">
-                                    <i class="fas fa-tasks"></i>
-                                    <input type="text" maxlength="50" placeholder="Type a task name">
+                            <form class="create-section__form" action="#">
+                                <div class="create-section__create">
+                                    <div class="create-section__create-input create-input">
+                                        <i class="fas fa-tasks"></i>
+                                        <input type="text" maxlength="50" placeholder="Type a task name">
+                                    </div>
+                                    <button class="create-section__create-button">Create</button>
                                 </div>
-                                <button class="create-section__create-button">Create</button>
-                            </div>
+                                <div class="options">
+                                    <div class="options__important">
+                                        <label for="important">
+                                            Mark as important:
+                                            <input type="checkbox" id="important" name="important">
+                                        </label>
+                                    </div>
+                                    <div class="options__select-list">
+                                        <label for="list">
+                                            Select a list:
+                                            <select name="list" id="list">
+                                                <option value="unlisted">
+                                                    Unlisted
+                                                </option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="create__todo-list create-section">
                             <div class="create-section__title">
                                 Create a new list
                             </div>
-                            <div class="create-section__create">
-                                <div class="create-section__create-input create-input">
-                                    <i class="fas fa-tasks"></i>
-                                    <input type="text" maxlength="50" placeholder="Type a list name...">
+                            <form action="#" class="create-section__form">
+                                <div class="create-section__create">
+                                    <div class="create-section__create-input create-input">
+                                        <i class="fas fa-tasks"></i>
+                                        <input type="text" maxlength="50" placeholder="Type a list name...">
+                                    </div>
+                                    <button class="create-section__create-button">Create</button>
                                 </div>
-                                <button class="create-section__create-button">Create</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

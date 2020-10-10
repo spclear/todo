@@ -83,7 +83,6 @@
   display: flex;
   align-items: center;
   font-size: 2rem;
-  cursor: pointer;
 }
 
 .create-section__title {
@@ -114,6 +113,35 @@
   border-radius: 5px;
   background-color: #546de5;
   color: #fff;
+}
+
+.create-section .options {
+  padding: 15px 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.create-section .options__important {
+  display: flex;
+  align-items: center;
+  color: #1e272e;
+}
+
+.create-section .options__important input {
+  margin-left: 10px;
+}
+
+.create-section .options__select-list {
+  margin-left: 30px;
+  color: #1e272e;
+}
+
+.create-section .options__select-list select {
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 200px;
+  margin-left: 10px;
 }
 
 .create-section__create-input {
@@ -152,7 +180,6 @@
   margin-right: 10px;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  align-self: flex-start;
 }
 
 .tasks__container {
@@ -222,6 +249,8 @@ input,
 input:focus,
 textarea,
 textarea:focus,
+select,
+select:focus,
 button,
 button:focus {
   outline: none;
