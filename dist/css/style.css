@@ -30,7 +30,7 @@
 
 .header__settings-bar {
   position: absolute;
-  right: 0;
+  right: 40px;
   top: 0;
   height: 100%;
   width: 30%;
@@ -57,6 +57,10 @@
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   align-self: flex-start;
+}
+
+.create input:focus {
+  background-color: none;
 }
 
 .create__container {
@@ -219,6 +223,10 @@
 
 .tasks__list::-webkit-scrollbar {
   display: none;
+}
+
+.tasks .unlisted {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .tasks__item {

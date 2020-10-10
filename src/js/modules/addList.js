@@ -5,7 +5,7 @@ export const addList = (formSelector, listSelector) => {
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    
+
     const lists = JSON.parse(localStorage.getItem('lists'));
     const formData = new FormData(form);
     const listName = formData.get('list');
@@ -16,14 +16,14 @@ export const addList = (formSelector, listSelector) => {
     }
 
     if (listIndex === -1) {
-      const newList = {listName, listItems: []}
-      lists.push(newList);
+      lists.push({ listName, listItems: [] });
+      
+      localStorage.setItem('lists', JSON.stringify(lists));
+      updateLists(listSelector);
+      
+      form.reset();
     } else {
       alert('This list is already exist!');
     }
-
-    localStorage.setItem('lists', JSON.stringify(lists));
-    updateLists(listSelector);
-    form.reset();
   });
 }

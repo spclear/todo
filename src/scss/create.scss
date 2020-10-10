@@ -11,6 +11,10 @@ $input_height: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   align-self: flex-start;
 
+  input:focus {
+    background-color: none;
+  }
+
   &__container {
     padding: 25px;
     display: flex;

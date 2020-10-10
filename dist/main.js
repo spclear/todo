@@ -114,6 +114,25 @@ function init() {
 
 /***/ }),
 
+/***/ "./src/js/common/localStorage.js":
+/*!***************************************!*\
+  !*** ./src/js/common/localStorage.js ***!
+  \***************************************/
+/*! exports provided: getListsNames */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getListsNames", function() { return getListsNames; });
+const getListsNames = () => {
+  const lists = JSON.parse(localStorage.getItem('lists'));
+  return lists.reduce((acc, curr) => (
+    acc = [...acc, curr.listName]
+  ), []);
+}
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -124,9 +143,11 @@ function init() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_initialize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/initialize */ "./src/js/common/initialize.js");
-/* harmony import */ var _modules_addList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/addList */ "./src/js/modules/addList.js");
-/* harmony import */ var _modules_deleteList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/deleteList */ "./src/js/modules/deleteList.js");
-/* harmony import */ var _modules_updateLists__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/updateLists */ "./src/js/modules/updateLists.js");
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common/localStorage */ "./src/js/common/localStorage.js");
+/* harmony import */ var _modules_addList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/addList */ "./src/js/modules/addList.js");
+/* harmony import */ var _modules_deleteList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/deleteList */ "./src/js/modules/deleteList.js");
+/* harmony import */ var _modules_updateLists__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/updateLists */ "./src/js/modules/updateLists.js");
+
 
 
 
@@ -134,9 +155,10 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener('DOMContentLoaded', () => {
   Object(_common_initialize__WEBPACK_IMPORTED_MODULE_0__["default"])();  
-  Object(_modules_updateLists__WEBPACK_IMPORTED_MODULE_3__["default"])('.tasks__list');
-  Object(_modules_deleteList__WEBPACK_IMPORTED_MODULE_2__["default"])('.tasks__list', 'delete-list')
-  Object(_modules_addList__WEBPACK_IMPORTED_MODULE_1__["addList"])('.new-list', '.tasks__list');
+  Object(_modules_updateLists__WEBPACK_IMPORTED_MODULE_4__["default"])('.tasks__list');
+  Object(_modules_deleteList__WEBPACK_IMPORTED_MODULE_3__["default"])('.tasks__list', 'delete-list')
+  Object(_modules_addList__WEBPACK_IMPORTED_MODULE_2__["addList"])('.new-list', '.tasks__list');
+
 })
 
 
@@ -160,7 +182,7 @@ const addList = (formSelector, listSelector) => {
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    
+
     const lists = JSON.parse(localStorage.getItem('lists'));
     const formData = new FormData(form);
     const listName = formData.get('list');
@@ -171,15 +193,15 @@ const addList = (formSelector, listSelector) => {
     }
 
     if (listIndex === -1) {
-      const newList = {listName, listItems: []}
-      lists.push(newList);
+      lists.push({ listName, listItems: [] });
+      
+      localStorage.setItem('lists', JSON.stringify(lists));
+      Object(_updateLists__WEBPACK_IMPORTED_MODULE_0__["default"])(listSelector);
+      
+      form.reset();
     } else {
       alert('This list is already exist!');
     }
-
-    localStorage.setItem('lists', JSON.stringify(lists));
-    Object(_updateLists__WEBPACK_IMPORTED_MODULE_0__["default"])(listSelector);
-    form.reset();
   });
 }
 
@@ -199,17 +221,18 @@ __webpack_require__.r(__webpack_exports__);
 
 function deleteListener(listSelector, deletingTriggerClass) {
   const listNode = document.querySelector(listSelector);
-  let lists = JSON.parse(localStorage.getItem('lists'));
   
   listNode.addEventListener('click', e => {
+    let lists = JSON.parse(localStorage.getItem('lists'));
+
     const isTrigger = e.target.classList.contains(deletingTriggerClass);
 
     if (e.target && isTrigger) {
       const listName = e.target.getAttribute('data-list-name');
 
       lists = lists.filter(item => item.listName !== listName);
+      
       localStorage.setItem('lists', JSON.stringify(lists));
-
       Object(_updateLists__WEBPACK_IMPORTED_MODULE_0__["default"])(listSelector);
     }
   })
@@ -228,23 +251,26 @@ function deleteListener(listSelector, deletingTriggerClass) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _common_localStorage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/localStorage */ "./src/js/common/localStorage.js");
+
+
 function updateLists(listSelector) {
-  const lists = JSON.parse(localStorage.getItem('lists'));
+  const listNames = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getListsNames"])();
   const listNode = document.querySelector(listSelector);
   let result = '';
   
   const isNotUnlisted = (listName) => {
     if (listName !== "Unlisted") {
-      return `<i class="fas fa-times delete-list" data-list-name=${listName}></i>`
+      return `<i class="fas fa-times delete-list" data-list-name='${listName}'></i>`
     }
     return '';
   }
   
-  lists.forEach(item => {
+  listNames.forEach(item => {
     result += `
-      <div class="tasks__item">
-        ${item.listName}
-        ${isNotUnlisted(item.listName)}
+      <div class="tasks__item ${item === 'Unlisted' && 'unlisted'}">
+        ${item}
+        ${isNotUnlisted(item)}
       </div>
     `
   })
