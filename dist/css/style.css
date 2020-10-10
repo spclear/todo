@@ -113,6 +113,7 @@
   border-radius: 5px;
   background-color: #546de5;
   color: #fff;
+  cursor: pointer;
 }
 
 .create-section .options {
@@ -228,8 +229,19 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 20px;
   color: #fff;
+}
+
+.tasks__item:hover .fas {
+  color: #fff;
+}
+
+.tasks__item .fas {
+  color: transparent;
+  cursor: pointer;
+  transition: color .2s;
 }
 
 * {
