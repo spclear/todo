@@ -11,6 +11,7 @@ function init() {
     ];
 
     localStorage.setItem('lists', JSON.stringify(lists));
+    localStorage.setItem('currListId', 'unlisted');
   }
 }
 

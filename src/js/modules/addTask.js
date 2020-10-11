@@ -1,6 +1,7 @@
 import { getAllLists } from '../common/localStorage';
+import updateTasks from './updateTasks';
 
-function addTask(formSelector) {
+function addTask(formSelector, taskListSelector) {
   const form = document.querySelector(formSelector);
 
   form.addEventListener('submit', e => {
@@ -13,12 +14,14 @@ function addTask(formSelector) {
     const newTask = {
       task: formData.get('task'),
       isImportant: formData.get('important') ? true : false,
+      isCompleted: false,
     }
 
     requiredList.listItems.push(newTask);
     localStorage.setItem('lists', JSON.stringify(lists));
 
     form.reset();
+    updateTasks(taskListSelector);
   })
 }
 

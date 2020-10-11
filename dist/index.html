@@ -73,21 +73,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="tasks">
-                    <div class="container tasks__container">
-                        <h3 class="tasks__title">
+                <div class="lists">
+                    <div class="container lists__container">
+                        <h3 class="lists__title">
                             Your lists
                         </h3>
-                        <div class="tasks__list">
-                            <div class="tasks__no-list">
-                                You have no lists yet :(
-                            </div>
+                        <div class="lists__list">
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="main__details">
-
+                <div class="container main__container">
+                    <h3 class="main__details-title">
+                        Your tasks
+                    </h3>
+                    <div class="main__content">
+                        <div class="list-descr">
+                            <h4 class="list-descr__title">
+                                LIST:
+                                <span id="list-name">
+                                    Unlisted
+                                </span>
+                            </h4>
+                            <div id="tasks-list" class="list-descr__tasks-list">
+                                <div class="list-descr__task">
+                                    <input type="checkbox" id="completed" checked name="completed">
+                                    <label for="completed" class="list-descr__task-text">
+                                        Create a list of tasks!
+                                    </label>
+                                    <i class="fas fa-star important"></i>
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -6,14 +6,13 @@ function deleteListener(listSelector, deletingTriggerClass, selectSelector) {
   
   listNode.addEventListener('click', e => {
     let lists = getAllLists();
-
     const isTrigger = e.target.classList.contains(deletingTriggerClass);
-
+    
     if (e.target && isTrigger) {
       const listName = e.target.getAttribute('data-list-name');
 
-      lists = lists.filter(item => item.listName !== listName);
-      
+      lists = lists.filter(item => item.id !== listName);
+
       localStorage.setItem('lists', JSON.stringify(lists));
       updateLists(listSelector, selectSelector);
     }

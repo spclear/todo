@@ -15,10 +15,17 @@
     <div class="container main__container">
       <div class="main__descr">
         @@include('./html/create.html')
-        @@include('./html/tasksList.html')
+        @@include('./html/lists.html')
       </div>
       <div class="main__details">
-        
+        <div class="container main__container">
+          <h3 class="main__details-title">
+            Your tasks
+          </h3>
+          <div class="main__content">
+            @@include('./html/listDescription.html')
+          </div>
+        </div>
       </div>
     </div>
   </main>

@@ -1,6 +1,8 @@
 @import './header.scss';
 @import './create.scss';
-@import './taskslist.scss';
+@import './lists.scss';
+@import './listDescr.scss';
+@import './common/mixins.scss';
 
 * {
   margin: 0;
@@ -32,6 +34,11 @@ button:focus {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
+  margin-top: $header_height;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .container {
     max-width: 1000px;
@@ -39,11 +46,34 @@ body {
   }
   .main {
     &__container {
-      padding: 40px 25px;
+      padding: 25px;
     }
 
     &__descr {
       display: flex;
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    &__details {
+      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+      margin: 25px 10px 0 0;
+
+      &-title {
+        color: $base_color;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        text-align: center;
+
+        &::after {
+          content: '';
+          @include bottom_line(20px);
+        }
+      }
     }
   }
 }
