@@ -7,7 +7,7 @@ const beautify = require('gulp-beautify');
 const { src } = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 
-const distFolder = './dist/';
+const distFolder = './docs/';
 const srcFolder = './src/';
 
 function html() {
