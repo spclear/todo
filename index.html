@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <div class="header__title">ToDo</div>
+            <div class="header__settings-bar">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container main__container">
+            <div class="main__descr">
+                <div class="create">
+                    <div class="container create__container">
+                        <div class="create__todo-task create-section">
+                            <div class="create-section__title">
+                                Create a new task
+                            </div>
+                            <form class="create-section__form new-task" action="#">
+                                <div class="create-section__create">
+                                    <div class="create-section__create-input create-input">
+                                        <i class="fas fa-tasks"></i>
+                                        <input type="text" name="task" maxlength="30" required placeholder="Type a task name">
+                                    </div>
+                                    <button class="create-section__create-button">Create</button>
+                                </div>
+                                <div class="options">
+                                    <div class="options__important">
+                                        <label for="important">
+                                            Mark as important:
+                                            <input type="checkbox" id="important" name="important">
+                                        </label>
+                                    </div>
+                                    <div class="options__select-list">
+                                        <label for="list">
+                                            Select a list:
+                                            <select name="list" id="select-list">
+                                                <option value="unlisted">
+                                                    Unlisted
+                                                </option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="create__todo-list create-section">
+                            <div class="create-section__title">
+                                Create a new list
+                            </div>
+                            <form action="#" class="create-section__form new-list">
+                                <div class="create-section__create">
+                                    <div class="create-section__create-input create-input">
+                                        <i class="fas fa-tasks"></i>
+                                        <input type="text" maxlength="25" name="list" required placeholder="Type a list name...">
+                                    </div>
+                                    <button class="create-section__create-button">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="lists">
+                    <div class="container lists__container">
+                        <h3 class="lists__title">
+                            Your lists
+                        </h3>
+                        <div class="lists__list">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main__details">
+                <div class="container main__container">
+                    <h3 class="main__details-title">
+                        Your tasks
+                    </h3>
+                    <div class="main__content">
+                        <div class="list-descr">
+                            <h4 class="list-descr__title">
+                                LIST:
+                                <span id="list-name">
+                                    Unlisted
+                                </span>
+                            </h4>
+                            <div id="tasks-list" class="list-descr__tasks-list">
+                                <div class="list-descr__task">
+                                    <input type="checkbox" id="completed" checked name="completed">
+                                    <label for="completed" class="list-descr__task-text">
+                                        Create a list of tasks!
+                                    </label>
+                                    <i class="fas fa-star important"></i>
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
