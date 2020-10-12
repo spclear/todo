@@ -1,0 +1,49 @@
+@import './common/colors';
+
+.popup {
+  position: fixed;
+  left: 50%;
+  height: 100vh;
+  width: 100vw;
+  transform: translateX(-50%);
+  top: 30px;
+
+  &__container {
+    position: relative;
+    min-height: 100px;
+    width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    animation: fadeInDown;
+    animation-duration: .3s;
+    justify-self: center;
+  }
+
+  &__close {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    width: 100%;
+    font-weight: bold;
+    color: $base_color;
+    font-size: 1.6rem;
+    padding: 25px;
+  }
+}

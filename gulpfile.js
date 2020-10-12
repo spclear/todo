@@ -6,8 +6,9 @@ const sass = require('gulp-sass');
 const beautify = require('gulp-beautify');
 const { src } = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
+var ghpages = require('gh-pages');
 
-const distFolder = './docs/';
+const distFolder = './dist/';
 const srcFolder = './src/';
 
 function html() {
@@ -98,5 +99,10 @@ function prodCss() {
   )
 }
 
+function publish() {
+  return ghpages.publish('dist');
+}
+
 exports.buildProd = gulp.series(html, prodCss, prodJs, copyAssets);
+exports.publish = gulp.series(css, html, js, copyAssets, publish);
 exports.default = gulp.series(css, html, js, copyAssets, watchChanges);

@@ -1,30 +1,30 @@
-import { getAllLists } from "../common/localStorage";
-import { renderListItem } from "../common/render";
+import { getAllLists, getCurrList } from "../common/localStorage";
+import { renderTaskItem } from "../common/render";
 
 function updateTasks(listSelector) {
-  const reqList = localStorage.getItem('currListId');
-  const list = document.querySelector(listSelector);
+  const reqList = getCurrList();
   const lists = getAllLists();
-  let result = '';
-
   const currList = lists.find(item => item.id === reqList);
+
+  let result = '';
 
   if (currList) {
     currList.listItems.forEach((item, index) => {
       const { task, isImportant, isCompleted } = item;
-      result += renderListItem(task, index, isImportant, isCompleted);
+      result += renderTaskItem(task, index, isImportant, isCompleted);
     })
   }
 
   if (!result) {
     result = `
       <div class="list-descr__no-tasks">
-        You have no tasks yet :(
+        You have no tasks yet
       </div>
     `
   }
 
-  list.innerHTML = result;
+  document.querySelector(listSelector).innerHTML = result;
+  document.querySelector('#current-list').textContent = reqList;
 }
 
 export default updateTasks;

@@ -10,11 +10,12 @@
   "browserslist": [
     "last 5 versions",
     "not dead"
-  ] ,
+  ],
   "author": "Sasha",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.26.12",
+    "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-beautify": "^3.0.0",

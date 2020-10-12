@@ -1,25 +1,23 @@
 import init from './modules/initialize';
 import { addList } from './modules/addList';
-import deleteListener from './modules/deleteList';
+import onDeleteList from './modules/deleteList';
 import updateLists from './modules/updateLists';
-import configureSelect from './modules/configureSelect';
 import addTask from './modules/addTask';
-import updateTasks from './modules/updateTasks';
-import configureTasks from './modules/configureTasksList';
+import setupTasksList from './modules/setupTasksList';
 import { changeList } from './modules/changeList';
+import { setupPopup } from './common/popup';
 
 document.addEventListener('DOMContentLoaded', () => {
   init();  
 
-  updateTasks('#tasks-list');
-  configureTasks('#tasks-list');
-
   updateLists('.lists__list', '#select-list');
-  configureSelect('#select-list');
+  setupTasksList('#tasks-list');
 
-  deleteListener('.lists__list', 'delete-list', '#select-list');
-  changeList('.lists__list', 'delete-list', '#tasks-list', '#list-name')
+  onDeleteList('.lists__list', '#select-list', '#tasks-list');
+  changeList('.lists__list', '#tasks-list')
 
-  addList('.new-list', '.lists__list', '#select-list');
+  addList('.new-list', '.lists__list', '#select-list', '.popup');
   addTask('.new-task', '#tasks-list');
+
+  setupPopup('.popup');
 })

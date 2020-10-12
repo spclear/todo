@@ -20,7 +20,7 @@
     margin: 10px 0 20px;
     color: rgba(0, 0, 0, .5);
     
-    #list-name {
+    #current-list {
       text-transform: uppercase;
       color: $base_color;
 
@@ -50,7 +50,6 @@
     min-width: 300px;
     flex-grow: 1;
     margin-bottom: 10px;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     border: 1px solid $gray_color;
     
     &-text {

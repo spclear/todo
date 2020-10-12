@@ -2,6 +2,7 @@
 @import './create.scss';
 @import './lists.scss';
 @import './listDescr.scss';
+@import './popup.scss';
 @import './common/mixins.scss';
 
 * {
@@ -29,6 +30,10 @@ button:focus {
   background-color: none;
   text-decoration: none;
   border: none;
+}
+
+.hide {
+  display: none;
 }
 
 body {

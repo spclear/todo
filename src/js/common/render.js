@@ -1,4 +1,4 @@
-export function renderListItem(text, id, isImportant, isCompleted) {
+export function renderTaskItem(text, id, isImportant, isCompleted) {
   const important = isImportant ? 'important' : '';
   const completed = isCompleted ? 'checked' : '';
 
@@ -16,3 +16,12 @@ export function renderListItem(text, id, isImportant, isCompleted) {
     </div>
   `
 }
+
+export function renderListItem(id, listName) {
+  return `
+    <div data-list-name="${id}" class="lists__item">
+      ${listName}
+      <i class="fas fa-times" id="delete" data-list-name='${id}'></i>
+    </div>
+  `
+};
