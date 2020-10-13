@@ -232,6 +232,7 @@
   overflow-y: scroll;
   height: 240px;
   margin-top: 25px;
+  scrollbar-width: none;
 }
 
 .lists__list::-webkit-scrollbar {
@@ -271,6 +272,7 @@
   min-height: 200px;
   max-height: 800px;
   overflow-y: scroll;
+  scrollbar-width: none;
   padding: 10px 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -433,6 +435,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   margin-top: 50px;
+  scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
