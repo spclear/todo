@@ -1,21 +1,30 @@
 @import './common/colors.scss';
 @import './common/mixins.scss';
+@import './common/media.scss';
 
 .list-descr {
-
   min-width: 400px;
   min-height: 200px;
   max-height: 800px;
   overflow-y: scroll;
   scrollbar-width: none;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  
+  @media screen and (max-width: $tablet_screen) {
+    min-height: 30vh;
+    min-width: 0;
+    width: 100%;
+  }
+
+  @media screen and (max-width: $smallphone_screen) {
+    border: none;
+  }
 
   &::-webkit-scrollbar {
     display: none;
   }
-
-  padding: 10px 20px;
-  border: 1px solid rgba(0, 0, 0, .1);
-
+  
   &__title {
     text-align: center;
     margin: 10px 0 20px;
@@ -24,7 +33,6 @@
     #current-list {
       text-transform: uppercase;
       color: $base_color;
-
     }
   }
   

@@ -1,5 +1,6 @@
 @import './common/colors.scss';
 @import './common/mixins.scss';
+@import './common/media.scss';
 
 .lists {
   flex-grow: 1;
@@ -8,6 +9,18 @@
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   position: relative;
+
+  @media screen and (max-width: $tablet_screen) {
+    max-width: none;
+    width: 95%;
+    margin-top: 25px;
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: $smallphone_screen) {
+    width: 100%;
+    box-shadow: none;
+  }
 
   &__container {
     padding: 25px;
@@ -53,6 +66,19 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    @media screen and (max-width: $tablet_screen) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+    }
+
+    @media screen and (max-width: $smartphone_screen) {
+      align-items: center;
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
   }
 
   .unlisted {
@@ -72,6 +98,16 @@
     color: #fff;
     cursor: pointer;
 
+    @media screen and (max-width: $tablet_screen) {
+      max-width: calc(50% - 20px);
+      margin-right: 10px;
+    }
+
+    @media screen and (max-width: $smartphone_screen) {
+      max-width: 90%;
+      margin-right: 0;
+    }
+
     &:hover {
       .fas {
         color: #fff;
@@ -82,6 +118,10 @@
       color: transparent;
       cursor: pointer;
       transition: color .2s;
+
+      @media (hover: none){
+        color: #fff;
+      }
     }
   }
 }

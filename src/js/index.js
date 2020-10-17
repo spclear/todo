@@ -20,4 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
   addTask('.new-task', '#tasks-list');
 
   setupPopup('.popup');
+
+  // toggle create window 
+
+  const hamburger = document.querySelector('.header__settings-bar .fas');
+  const createDiv = document.querySelector('.create');
+
+  hamburger.addEventListener('click', () => {
+    createDiv.classList.toggle('hide-create')
+  })
 })

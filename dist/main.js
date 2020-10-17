@@ -265,6 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
   Object(_modules_addTask__WEBPACK_IMPORTED_MODULE_4__["default"])('.new-task', '#tasks-list');
 
   Object(_common_popup__WEBPACK_IMPORTED_MODULE_7__["setupPopup"])('.popup');
+
+  // toggle create window 
+
+  const hamburger = document.querySelector('.header__settings-bar .fas');
+  const createDiv = document.querySelector('.create');
+
+  hamburger.addEventListener('click', () => {
+    createDiv.classList.toggle('hide-create')
+  })
 })
 
 

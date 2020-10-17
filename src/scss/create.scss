@@ -1,24 +1,51 @@
 @import './common/colors.scss';
 @import './common/mixins.scss';
+@import './common/media.scss';
 
 $input_height: 50px;
 
+.hide-create {
+  display: flex;
+
+  @media screen and (max-width: $smallphone_screen) {
+    display: none;
+  }
+}
+
 .create {
   flex-grow: 1;
-  max-width: 60%;
+  max-width: 50%;
   margin-right: 10px;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   align-self: flex-start;
+  scrollbar-width: 0;
 
-  input:focus {
-    background-color: none;
+  @media screen and (max-width: $tablet_screen) {
+    max-width: 100%;
+    width: 95%;
+    align-self: auto;
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: $smallphone_screen) {
+    position: fixed;
+    width: 100vw;
+    z-index: 100;
+    background-color: #fff;
+    height: 100vh;
+    overflow: scroll;
+    box-shadow: none;
+    border-bottom: 1px dotted rgba(0, 0, 0, .2);
+    animation: zoomIn;
+    animation-duration: .2s;
   }
 
   &__container {
     padding: 25px;
     display: flex;
     flex-direction: column;
+    width: 100%;
   } 
 
   &-section {
@@ -31,10 +58,28 @@ $input_height: 50px;
       margin-bottom: 20px;
     }
 
+    form {
+      position: relative;
+    }
+
     .options {
       padding: 15px 5px 0;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+
+      @media screen and (max-width: $tablet_screen) {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      @media screen and (max-width: $smartphone_screen) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      @media screen and (max-width: $smallphone_screen) {
+        margin-bottom: $input_height + 10px;
+      }
 
       &__important {
         display: flex;
@@ -47,8 +92,22 @@ $input_height: 50px;
       }
 
       &__select-list {
-        margin-left: 30px;
+        margin-top: 10px;
         color: $base_color;
+
+        @media screen and (max-width: $tablet_screen) {
+          margin-top: 0px;
+          margin-left: 30px;
+        }
+
+        @media screen and (max-width: $smartphone_screen) {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+
+        @media screen and (max-width: $smallphone_screen) {
+          width: 100%;
+        }
 
         select {
           height: 28px;
@@ -56,6 +115,16 @@ $input_height: 50px;
           border: 1px solid rgba(0, 0, 0, .2);
           width: 200px;
           margin-left: 10px;
+          
+          @media screen and (max-width: $smallphone_screen) {
+            margin-left: 0;
+            margin-top: 10px;
+            flex-grow: 1;
+            display: inline-block;
+            flex-shrink: 1;
+            flex-grow: 1;
+            width: 100%;
+          }
         }
       }
     }
@@ -76,13 +145,21 @@ $input_height: 50px;
         content: '';
         @include bottom_line(15px);
       }
+
+      @media screen and (max-width: $smallphone_screen) {
+        text-align: center;
+      }
     }
 
     &__create {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: $input_height;
+      // height: $input_height;
+
+      @media screen and (max-width: $smallphone_screen) {
+        flex-direction: column;
+      }
     }
 
     &__create-button {
@@ -93,6 +170,14 @@ $input_height: 50px;
       background-color: $blue_color;
       color: #fff;
       cursor: pointer;
+
+      @media screen and (max-width: $smallphone_screen) {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+        position: absolute;
+        bottom: 0;
+      }
     }
     
     &__create-input {
@@ -104,12 +189,17 @@ $input_height: 50px;
       flex-grow: 1;
       border: 1px solid rgba(0, 0, 0, .1);
 
+      @media screen and (max-width: $smallphone_screen) {
+        width: 100%;
+      }
+
       input, input:focus {
         flex-grow: 1;
         height: 100%;
         margin: 0 10px 0 20px;
         color: $base_color;
         font-size: 1rem;
+        max-width: 80%;
 
         &::placeholder {
           color: $gray_color;
@@ -122,6 +212,11 @@ $input_height: 50px;
       height: 30px;
       display: flex;
       align-items: center;
+
+      @media screen and (max-width: $smallphone_screen) {
+        justify-content: center;
+        margin-bottom: $input_height + 10px;
+      }
 
       &-title {
         color: $base_color;
