@@ -4,7 +4,7 @@
       <div class="create-section__title">
         Create a new task
       </div>
-      <form class="create-section__form new-task" action="#">
+      <form autocomplete="off" class="create-section__form new-task" action="#">
         <div class="create-section__create">
           <div class="create-section__create-input create-input" >
             <i class="fas fa-tasks"></i>
@@ -36,13 +36,25 @@
       <div class="create-section__title">
         Create a new list
       </div>
-      <form action="#" class="create-section__form new-list">
+      <form  autocomplete="off" action="#" class="create-section__form new-list">
         <div class="create-section__create">
           <div class="create-section__create-input create-input" >
             <i class="fas fa-tasks"></i>
             <input type="text" maxlength="25" name="list" required placeholder="Type a list name...">
           </div>
           <button class="create-section__create-button">Create</button>
+        </div>
+        <div class="create-section__color-pick">
+          <input type="radio" id="546de5" name="color" value="#546de5" checked>
+          <label for="546de5"></label>
+          <input type="radio" id="ff3f34" name="color" value="#ff3f34">
+          <label for="ff3f34"></label>
+          <input type="radio" id="ED4C67" name="color" value="#ED4C67">
+          <label for="ED4C67"></label>
+          <input type="radio" id="10ac84" name="color" value="#10ac84">
+          <label for="10ac84"></label>
+          <input type="radio" id="FFC312" name="color" value="#FFC312">
+          <label for="FFC312"></label>
         </div>
       </form>
     </div>

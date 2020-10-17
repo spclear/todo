@@ -9,7 +9,8 @@ function updateLists(listSelector, selectSelector) {
   
   lists.forEach(item => {
     if (item.id !== 'unlisted') {
-      result += renderListItem(item.id, item.listName);
+      const { id, listName, listColor } = item;
+      result += renderListItem(id, listName, listColor);
     }
   })
   

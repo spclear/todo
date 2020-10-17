@@ -26,8 +26,38 @@ $input_height: 50px;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 25px;
+    
     > * {
       margin-bottom: 20px;
+    }
+
+    .options {
+      padding: 15px 5px 0;
+      display: flex;
+      align-items: center;
+
+      &__important {
+        display: flex;
+        align-items: center;
+        color: $base_color;
+
+        input {
+          margin-left: 10px;
+        }
+      }
+
+      &__select-list {
+        margin-left: 30px;
+        color: $base_color;
+
+        select {
+          height: 28px;
+          border-radius: 4px;
+          border: 1px solid rgba(0, 0, 0, .2);
+          width: 200px;
+          margin-left: 10px;
+        }
+      }
     }
 
     .fas {
@@ -53,7 +83,6 @@ $input_height: 50px;
       align-items: center;
       justify-content: space-between;
       height: $input_height;
-      
     }
 
     &__create-button {
@@ -64,32 +93,6 @@ $input_height: 50px;
       background-color: $blue_color;
       color: #fff;
       cursor: pointer;
-    }
-    .options {
-      padding: 15px 5px 0;
-      display: flex;
-      align-items: center;
-
-      &__important {
-        display: flex;
-        align-items: center;
-        color: $base_color;
-        input {
-          margin-left: 10px;
-        }
-      }
-
-      &__select-list {
-        margin-left: 30px;
-        color: $base_color;
-        select {
-          height: 28px;
-          border-radius: 4px;
-          border: 1px solid rgba(0, 0, 0, .2);
-          width: 200px;
-          margin-left: 10px;
-        }
-      }
     }
     
     &__create-input {
@@ -114,6 +117,65 @@ $input_height: 50px;
       }
     }
 
+    &__color-pick {
+      margin: 20px auto 0;
+      height: 30px;
+      display: flex;
+      align-items: center;
+
+      &-title {
+        color: $base_color;
+        font-size: 1rem;
+      }
+
+      input[type="radio"] {
+        display: none;
+
+        &:checked+label {
+          border: 2px solid #fff;
+          box-shadow: 0 0 0 2px #222f3e;
+        }
+
+        &:checked+label::before {
+          content: '\2714';
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          color: #1e272e;
+        }
+      }
+
+      label {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        border-radius: 50%;
+        margin: 0 5px;
+        flex-shrink: 0;
+        cursor: pointer;
+
+        &:nth-of-type(1) {
+          background-color: #546de5;
+        }
+        &:nth-of-type(2) {
+          background-color: #ff3f34;
+        }
+        &:nth-of-type(3) {
+          background-color: #ED4C67;
+        }
+        &:nth-of-type(4) {
+          background-color: #10ac84;
+        }
+        &:nth-of-type(5) {
+          background-color: #FFC312;
+        }
+      }
+    }
   }
 
 

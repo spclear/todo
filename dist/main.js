@@ -213,9 +213,9 @@ function renderTaskItem(text, id, isImportant, isCompleted) {
   `
 }
 
-function renderListItem(id, listName) {
+function renderListItem(id, listName, color) {
   return `
-    <div data-list-name="${id}" class="lists__item">
+    <div style="background-color: ${color}" data-list-name="${id}" class="lists__item">
       ${listName}
       <i class="fas fa-times" id="delete" data-list-name='${id}'></i>
     </div>
@@ -295,6 +295,7 @@ const addList = (formSelector, listSelector, selectSelector, popupSelector) => {
     const lists = Object(_common_localStorage__WEBPACK_IMPORTED_MODULE_0__["getAllLists"])();
     const formData = new FormData(form);
     const listName = formData.get('list');
+    const listColor = formData.get('color');
     const listIndex = lists.findIndex(item => item.id === listName.toLowerCase());
 
     if (lists.length >= 20) {
@@ -303,7 +304,12 @@ const addList = (formSelector, listSelector, selectSelector, popupSelector) => {
     }
 
     if (listIndex === -1) {
-      lists.push({ listName, id: listName.toLowerCase(), listItems: [] });
+      lists.push({
+        listName,
+        id: listName.toLowerCase(),
+        listItems: [],
+        listColor 
+      });
       localStorage.setItem('lists', JSON.stringify(lists));
       
       Object(_updateLists__WEBPACK_IMPORTED_MODULE_2__["default"])(listSelector, selectSelector);
@@ -544,7 +550,8 @@ function updateLists(listSelector, selectSelector) {
   
   lists.forEach(item => {
     if (item.id !== 'unlisted') {
-      result += Object(_common_render__WEBPACK_IMPORTED_MODULE_1__["renderListItem"])(item.id, item.listName);
+      const { id, listName, listColor } = item;
+      result += Object(_common_render__WEBPACK_IMPORTED_MODULE_1__["renderListItem"])(id, listName, listColor);
     }
   })
   

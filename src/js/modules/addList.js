@@ -12,6 +12,7 @@ export const addList = (formSelector, listSelector, selectSelector, popupSelecto
     const lists = getAllLists();
     const formData = new FormData(form);
     const listName = formData.get('list');
+    const listColor = formData.get('color');
     const listIndex = lists.findIndex(item => item.id === listName.toLowerCase());
 
     if (lists.length >= 20) {
@@ -20,7 +21,12 @@ export const addList = (formSelector, listSelector, selectSelector, popupSelecto
     }
 
     if (listIndex === -1) {
-      lists.push({ listName, id: listName.toLowerCase(), listItems: [] });
+      lists.push({
+        listName,
+        id: listName.toLowerCase(),
+        listItems: [],
+        listColor 
+      });
       localStorage.setItem('lists', JSON.stringify(lists));
       
       updateLists(listSelector, selectSelector);

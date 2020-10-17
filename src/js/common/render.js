@@ -17,9 +17,9 @@ export function renderTaskItem(text, id, isImportant, isCompleted) {
   `
 }
 
-export function renderListItem(id, listName) {
+export function renderListItem(id, listName, color) {
   return `
-    <div data-list-name="${id}" class="lists__item">
+    <div style="background-color: ${color}" data-list-name="${id}" class="lists__item">
       ${listName}
       <i class="fas fa-times" id="delete" data-list-name='${id}'></i>
     </div>

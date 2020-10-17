@@ -103,6 +103,6 @@ function publish() {
   return ghpages.publish('dist');
 }
 
-exports.buildProd = gulp.series(html, prodCss, prodJs, copyAssets);
+exports.build = gulp.series(html, prodCss, prodJs, copyAssets);
 exports.publish = gulp.series(css, html, js, copyAssets, publish);
 exports.default = gulp.series(css, html, js, copyAssets, watchChanges);
