@@ -2,8 +2,10 @@ export function renderTaskItem(text, id, isImportant, isCompleted) {
   const important = isImportant ? 'important' : '';
   const completed = isCompleted ? 'checked' : '';
 
-  const lineThrough = isCompleted ? 'style="text-decoration: line-through #fff"' : '';
-  const bgc = isCompleted ? 'style="background-color: rgba(0, 0, 0, .5)"' : '';
+  const lineThrough = isCompleted ? 'style="text-decoration: line-through"' : '';
+  const bgc = isCompleted ?
+    'style="background-color: rgba(0, 0, 0, .2);"'
+    : '';
 
   return `
     <div ${bgc} class="list-descr__task">

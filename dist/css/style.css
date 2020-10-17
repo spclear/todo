@@ -27,7 +27,7 @@
   animation: swing;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  cursor: pointer;
+  cursor: default;
 }
 
 .header__settings-bar {
@@ -396,6 +396,12 @@
   height: 20px;
 }
 
+.list-descr__task input[type="checkbox"] {
+  margin: 0 20px;
+  width: 20px;
+  height: 20px;
+}
+
 .list-descr__task .fas {
   cursor: pointer;
 }
@@ -406,7 +412,7 @@
 }
 
 .list-descr__task .important {
-  color: #F79F1F;
+  color: yellow;
 }
 
 .list-descr__task .fa-trash {
