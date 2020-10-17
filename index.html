@@ -16,14 +16,15 @@
         <div class="container header__container">
             <div class="header__title">ToDo</div>
             <div class="header__settings-bar">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
     <main class="main">
         <div class="container main__container">
             <div class="main__descr">
-                <div class="create">
+
+                <div class="create hide-create">
                     <div class="container create__container">
                         <div class="create__todo-task create-section">
                             <div class="create-section__title">
@@ -47,12 +48,12 @@
                                     <div class="options__select-list">
                                         <label for="list">
                                             Select a list:
-                                            <select name="list" id="select-list">
-                                                <option value="unlisted">
-                                                    Unlisted
-                                                </option>
-                                            </select>
                                         </label>
+                                        <select name="list" id="select-list">
+                                            <option value="unlisted">
+                                                Unlisted
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </form>
@@ -96,6 +97,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="main__details">
                 <div class="container main__container">
@@ -127,7 +129,7 @@
                 Max number of lists is 20!
             </div>
         </div>
-    </div>;
+    </div>
 
     <script src="main.js"></script>
 </body>
