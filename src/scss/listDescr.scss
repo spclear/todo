@@ -19,6 +19,7 @@
 
   @media screen and (max-width: $smallphone_screen) {
     border: none;
+    padding: 10px 0;
   }
 
   &::-webkit-scrollbar {
@@ -60,6 +61,11 @@
     flex-grow: 1;
     margin-bottom: 10px;
     border: 1px solid $gray_color;
+
+    @media screen and (max-width: $smallphone_screen) {
+      min-width: 150px;
+      width: 100%;
+    }
     
     &-text {
       flex-grow: 1;
@@ -67,18 +73,19 @@
       cursor: pointer;
       padding: 0 30px 0 10px;
       font-weight: bold;
+
+      @media screen and (max-width: $smallphone_screen) {
+        font-size: .8rem;
+        padding-left: 0;
+        word-wrap: break-word;
+      }
     }
 
     input[type="checkbox"] {
       margin: 0 20px;
       width: 20px;
-      height: 20px;  
-    }
-
-    input[type="checkbox"] {
-      margin: 0 20px;
-      width: 20px;
-      height: 20px;  
+      height: 20px;
+      flex-shrink: 0;  
     }
 
 
