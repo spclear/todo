@@ -203,6 +203,13 @@ function renderTaskItem(text, id, isImportant, isCompleted) {
     'style="background-color: rgba(0, 0, 0, .2);"'
     : '';
 
+  if (text.length >= 20) {
+    let ind = text.slice(10).indexOf(' ', 10);
+
+    ind = (ind === -1) ? 20 : ind;
+    text = `${text.slice(0, ind)}<br>${text.slice(ind)}`;
+  }
+
   return `
     <div ${bgc} class="list-descr__task">
       <input type="checkbox" id="${id}" ${completed} name="completed">
