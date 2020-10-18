@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const createDiv = document.querySelector('.create');
 
   hamburger.addEventListener('click', () => {
-    createDiv.classList.toggle('hide-create')
+    createDiv.classList.toggle('hide-create');
+    hamburger.classList.toggle('fa-bars');
+    hamburger.classList.toggle('fa-times');
   })
 })

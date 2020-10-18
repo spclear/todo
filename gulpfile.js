@@ -6,7 +6,7 @@ const sass = require('gulp-sass');
 const beautify = require('gulp-beautify');
 const { src } = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
-var ghpages = require('gh-pages');
+const ghpages = require('gh-pages');
 
 const distFolder = './dist/';
 const srcFolder = './src/';
@@ -24,7 +24,10 @@ function html() {
 function css() {
   return (
     gulp.src(srcFolder + 'scss/style.scss')
-      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(sass({
+        outputStyle: 'expanded',
+        sourceMap: true,
+      }).on('error', sass.logError))
       .pipe(autoprefixer({
         cascade: false
       }))
